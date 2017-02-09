@@ -1,4 +1,4 @@
-'.source.haskell':
+'.source.frege':
   'editor':
     'commentStart': '-- '
     'increaseIndentPattern': '(((=|\\bdo|\\bwhere|\\bthen|\\belse|\\bof)\\s*)|(\\bif(?!.*\\bthen\\b.*\\belse\\b.*).*))$'
@@ -22,6 +22,3 @@
       variable:
         selector: '.identifier'
         typePriority: 0
-'.source.cabal':
-  'editor':
-    'commentStart':'-- '

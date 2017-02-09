@@ -1,10 +1,5 @@
-'fileTypes': [
-  'hs'
-  'cpphs'
-]
-'firstLineMatch': '^\\#\\!.*\\brunhaskell\\b'
-'name': 'Haskell'
-'scopeName': 'source.haskell'
+'fileTypes': []
+'scopeName': 'hint.message.frege'
 'macros':
   'identStartCharClass': '[\\p{Ll}_\\p{Lu}\\p{Lt}]'
   'identContCharClass': '[\\p{Ll}_\\p{Lu}\\p{Lt}\']'
@@ -36,20 +31,50 @@
   'lb': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
   'rb': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
   'b': '(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))|(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
+'patterns': [
+  {
+    'match': '^[^:]*:(.+)$'
+    'captures':
+      '1':
+        'patterns': [
+          {
+            'include': 'source.frege'
+          }
+        ]
+  }
+  {
+    'begin': '^[^:]*:$'
+    'end': '^(?=\\S)'
+    'patterns': [
+      {
+        'include': 'source.frege'
+      }
+    ]
+  }
+  {
+    'begin': '‘'
+    'end': '’'
+    'patterns': [
+      {
+        'include': 'source.frege'
+      }
+    ]
+  }
+]
 'repository':
   'block_comment':
     'patterns': [
       {
-        'name': 'comment.block.haddock.haskell'
+        'name': 'comment.block.haddock.frege'
         'begin': '\\{-\\s*[|^]'
         'end': '-\\}'
         'applyEndPatternLast': 1
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.comment.haddock.haskell'
+            'name': 'punctuation.definition.comment.haddock.frege'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.comment.haddock.haskell'
+            'name': 'punctuation.definition.comment.haddock.frege'
         'patterns': [
           {
             'include': '#block_comment'
@@ -57,16 +82,16 @@
         ]
       }
       {
-        'name': 'comment.block.haskell'
+        'name': 'comment.block.frege'
         'begin': '\\{-'
         'end': '-\\}'
         'applyEndPatternLast': 1
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.comment.block.start.haskell'
+            'name': 'punctuation.definition.comment.block.start.frege'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.comment.block.end.haskell'
+            'name': 'punctuation.definition.comment.block.end.frege'
         'patterns': [
           {
             'include': '#block_comment'
@@ -81,14 +106,14 @@
         'end': '(?!\\G)'
         'patterns': [
           {
-            'name': 'comment.line.double-dash.haddock.haskell'
+            'name': 'comment.line.double-dash.haddock.frege'
             'begin': '(--+)\\s+([|^])'
             'end': '\\n'
             'beginCaptures':
               '1':
-                'name': 'punctuation.definition.comment.haskell'
+                'name': 'punctuation.definition.comment.frege'
               '2':
-                'name': 'punctuation.definition.comment.haddock.haskell'
+                'name': 'punctuation.definition.comment.haddock.frege'
           }
         ]
       }
@@ -97,12 +122,12 @@
         'end': '(?!\\G)'
         'patterns': [
           {
-            'name': 'comment.line.double-dash.haskell'
+            'name': 'comment.line.double-dash.frege'
             'begin': '--'
             'end': '\\n'
             'beginCaptures':
               '0':
-                'name': 'punctuation.definition.comment.haskell'
+                'name': 'punctuation.definition.comment.frege'
           }
         ]
       }
@@ -114,32 +139,32 @@
     'patterns': [
       {
         'match': '\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])'
-        'name': 'constant.character.escape.haskell'
+        'name': 'constant.character.escape.frege'
       }
       {
         'match': '(?:\\\\o[0-7]+)'
-        'name': 'constant.character.escape.octal.haskell'
+        'name': 'constant.character.escape.octal.frege'
       }
       {
         'match': '(?:\\\\x[0-9A-Fa-f]+)'
-        'name': 'constant.character.escape.hexadecimal.haskell'
+        'name': 'constant.character.escape.hexadecimal.frege'
       }
       {
         'match': '(?:\\\\\\^[A-Z@\\[\\]\\\\^_])'
-        'name': 'constant.character.escape.control.haskell'
+        'name': 'constant.character.escape.control.frege'
       }
     ]
   'infix_op':
     'patterns': [
       {
-        'name': 'entity.name.function.infix.haskell'
+        'name': 'entity.name.function.infix.frege'
         'match': '(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))'
       }
     ]
   'module_exports':
     'patterns': [
       {
-        'name': 'meta.declaration.exports.haskell'
+        'name': 'meta.declaration.exports.frege'
         'begin': '\\('
         'end': '\\)'
         'applyEndPatternLast': 1
@@ -157,7 +182,7 @@
             'include': '#comma'
           }
           {
-            'name': 'meta.other.constructor-list.haskell'
+            'name': 'meta.other.constructor-list.frege'
             'begin': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))\\s*\\('
             'end': '\\)'
             'patterns': [
@@ -172,7 +197,7 @@
               }
               {
                 'match': '\\.\\.'
-                'name': 'keyword.operator.wildcard.haskell'
+                'name': 'keyword.operator.wildcard.frege'
               }
             ]
           }
@@ -185,27 +210,27 @@
   'module_name':
     'patterns': [
       {
-        'name': 'support.other.module.haskell'
+        'name': 'support.other.module.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'module_name_prefix':
     'patterns': [
       {
-        'name': 'support.other.module.haskell'
+        'name': 'support.other.module.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.'
       }
     ]
   'pragma':
     'patterns': [
       {
-        'name': 'meta.preprocessor.haskell'
+        'name': 'meta.preprocessor.frege'
         'begin': '\\{-#'
         'end': '#-\\}'
         'patterns': [
           {
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(NOTINLINE CONSTRUCTORLIKE|NOINLINE CONSTRUCTORLIKE|INLINE CONSTRUCTORLIKE|SPECIALISE NOTINLINE|SPECIALIZE NOTINLINE|SPECIALISE NOINLINE|SPECIALIZE NOINLINE|NOTINLINE CONLIKE|SPECIALISE INLINE|SPECIALIZE INLINE|NOINLINE CONLIKE|VECTORISE SCALAR|VECTORIZE SCALAR|OPTIONS_HADDOCK|INLINE CONLIKE|OPTIONS_DERIVE|OPTIONS_CATCH|OPTIONS_NHC98|OPTIONS_HUGS|OVERLAPPABLE|NOVECTORISE|NOVECTORIZE|OPTIONS_GHC|OPTIONS_JHC|OPTIONS_YHC|OVERLAPPING|DEPRECATED|INCOHERENT|INLINEABLE|SPECIALISE|SPECIALIZE|GENERATED|INLINABLE|NOTINLINE|VECTORISE|VECTORIZE|CONTRACT|LANGUAGE|NOINLINE|NOUNPACK|OVERLAPS|INCLUDE|MINIMAL|OPTIONS|WARNING|CFILES|INLINE|SOURCE|UNPACK|CTYPE|RULES|CORE|LINE|ANN|SCC)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-            'name': 'keyword.other.preprocessor.haskell'
+            'name': 'keyword.other.preprocessor.frege'
           }
         ]
       }
@@ -213,10 +238,10 @@
   'function_type_declaration':
     'patterns': [
       {
-        'name': 'meta.function.type-declaration.haskell'
+        'name': 'meta.function.type-declaration.frege'
         'begin': '^([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '2':
             'patterns': [
@@ -228,7 +253,7 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.frege'
         'patterns': [
           {
             'include': '#type_signature'
@@ -239,10 +264,10 @@
   'ctor_type_declaration':
     'patterns': [
       {
-        'name': 'meta.ctor.type-declaration.haskell'
+        'name': 'meta.ctor.type-declaration.frege'
         'begin': '^([ \\t]*)(?:(?:((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '2':
             'patterns': [
@@ -254,7 +279,7 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.frege'
         'patterns': [
           {
             'include': '#type_signature'
@@ -265,10 +290,10 @@
   'record_field_declaration':
     'patterns': [
       {
-        'name': 'meta.record-field.type-declaration.haskell'
+        'name': 'meta.record-field.type-declaration.frege'
         'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '(?=(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))|})'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '1':
             'patterns': [
@@ -280,7 +305,7 @@
               }
             ]
           '2':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.frege'
         'patterns': [
           {
             'include': '#type_signature'
@@ -297,7 +322,7 @@
         'include': '#comments'
       }
       {
-        'name': 'keyword.other.forall.haskell'
+        'name': 'keyword.other.forall.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
@@ -310,18 +335,18 @@
         'include': '#string'
       }
       {
-        'name': 'keyword.other.arrow.haskell'
+        'name': 'keyword.other.arrow.frege'
         'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
       }
       {
-        'name': 'keyword.other.big-arrow.haskell'
+        'name': 'keyword.other.big-arrow.frege'
         'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
       }
       {
         'include': '#operator'
       }
       {
-        'name': 'variable.other.generic-type.haskell'
+        'name': 'variable.other.generic-type.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
@@ -331,14 +356,14 @@
   'unit':
     'patterns': [
       {
-        'name': 'constant.language.unit.haskell'
+        'name': 'constant.language.unit.frege'
         'match': '\\(\\)'
       }
     ]
   'empty_list':
     'patterns': [
       {
-        'name': 'constant.language.empty-list.haskell'
+        'name': 'constant.language.empty-list.frege'
         'match': '\\[\\]'
       }
     ]
@@ -357,28 +382,28 @@
   'deriving_keyword':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
       }
     ]
   'deriving_list':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.frege'
         'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*\\('
         'end': '\\)'
         'beginCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
             'captures':
               '1':
-                'name': 'entity.other.inherited-class.haskell'
+                'name': 'entity.other.inherited-class.frege'
           }
         ]
       }
@@ -386,25 +411,25 @@
   'deriving_simple':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
           '2':
-            'name': 'entity.other.inherited-class.haskell'
+            'name': 'entity.other.inherited-class.frege'
       }
     ]
   'infix_function':
     'patterns': [
       {
-        'name': 'keyword.operator.function.infix.haskell'
+        'name': 'keyword.operator.function.infix.frege'
         'match': '(`)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(`)'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.haskell'
+            'name': 'punctuation.definition.entity.frege'
           '2':
-            'name': 'punctuation.definition.entity.haskell'
+            'name': 'punctuation.definition.entity.frege'
       }
     ]
   'quasi_quotes':
@@ -414,27 +439,27 @@
         'end': '(\\|)(\\])'
         'beginCaptures':
           '1':
-            'name': 'punctuation.definition.quasiquotes.begin.haskell'
+            'name': 'punctuation.definition.quasiquotes.begin.frege'
           '2':
-            'name': 'entity.name.tag.haskell'
+            'name': 'entity.name.tag.frege'
         'endCaptures':
           '2':
-            'name': 'punctuation.definition.quasiquotes.end.haskell'
-        'contentName': 'string.quoted.quasiquotes.haskell'
+            'name': 'punctuation.definition.quasiquotes.end.frege'
+        'contentName': 'string.quoted.quasiquotes.frege'
       }
     ]
   'module_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.module.haskell'
+        'name': 'meta.declaration.module.frege'
         'begin': '^([ \\t]*)(module)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'include': '#comments'
@@ -454,15 +479,15 @@
   'class_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.class.haskell'
+        'name': 'meta.declaration.class.frege'
         'begin': '^([ \\t]*)(class)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.class.haskell'
+            'name': 'keyword.other.class.frege'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'include': '#type_signature'
@@ -473,16 +498,16 @@
   'instance_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.instance.haskell'
+        'name': 'meta.declaration.instance.frege'
         'begin': '^([ \\t]*)(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'include': '#pragma'
@@ -496,13 +521,13 @@
   'deriving_instance_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.instance.deriving.haskell'
+        'name': 'meta.declaration.instance.deriving.frege'
         'begin': '^([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'include': '#pragma'
@@ -516,26 +541,26 @@
   'foreign_import':
     'patterns': [
       {
-        'name': 'meta.foreign.haskell'
+        'name': 'meta.foreign.frege'
         'begin': '^([ \\t]*)(foreign)\\s+(import|export)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
           '3':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'match': '(?:un)?safe'
             'captures':
               '0':
-                'name': 'keyword.other.haskell'
+                'name': 'keyword.other.frege'
           }
           {
             'include': '#function_type_declaration'
           }
           {
-            'include': '#haskell_expr'
+            'include': '#frege_expr'
           }
           {
             'include': '#comments'
@@ -546,12 +571,12 @@
   'regular_import':
     'patterns': [
       {
-        'name': 'meta.import.haskell'
+        'name': 'meta.import.frege'
         'begin': '^([ \\t]*)(import)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.frege'
         'patterns': [
           {
             'include': '#module_name'
@@ -563,7 +588,7 @@
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(qualified|as|hiding)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
             'captures':
               '1':
-                'name': 'keyword.other.haskell'
+                'name': 'keyword.other.frege'
           }
           {
             'include': '#comments'
@@ -574,14 +599,14 @@
   'data_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.type.data.haskell'
+        'name': 'meta.declaration.type.data.frege'
         'begin': '^([ \\t]*)(data|newtype)\\s+((?:(?!=|where).)*)'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.data.haskell'
+            'name': 'keyword.other.data.frege'
           '3':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.frege'
             'patterns': [
               {
                 'include': '#family_and_instance'
@@ -613,7 +638,7 @@
                   }
                 ]
               '2':
-                'name': 'meta.type-signature.haskell'
+                'name': 'meta.type-signature.frege'
                 'patterns': [
                   {
                     'include': '#type_signature'
@@ -624,18 +649,18 @@
             'match': '\\|'
             'captures':
               '0':
-                'name': 'punctuation.separator.pipe.haskell'
+                'name': 'punctuation.separator.pipe.frege'
           }
           {
-            'name': 'meta.declaration.type.data.record.block.haskell'
+            'name': 'meta.declaration.type.data.record.block.frege'
             'begin': '\\{'
             'beginCaptures':
               '0':
-                'name': 'keyword.operator.record.begin.haskell'
+                'name': 'keyword.operator.record.begin.frege'
             'end': '\\}'
             'endCaptures':
               '0':
-                'name': 'keyword.operator.record.end.haskell'
+                'name': 'keyword.operator.record.end.frege'
             'patterns': [
               {
                 'include': '#comments'
@@ -657,13 +682,13 @@
   'type_alias':
     'patterns': [
       {
-        'name': 'meta.declaration.type.type.haskell'
+        'name': 'meta.declaration.type.type.frege'
         'begin': '^([ \\t]*)(type)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.frege'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.type.haskell'
+            'name': 'keyword.other.type.frege'
         'patterns': [
           {
             'include': '#comments'
@@ -686,26 +711,26 @@
   'keywords':
     'patterns': [
       {
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving|where|data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.operator.haskell'
+        'name': 'keyword.operator.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))infix[lr]?(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.control.haskell'
+        'name': 'keyword.control.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(do|if|then|else|case|of|let|in|default|mdo|rec|proc)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'c_preprocessor':
     'patterns': [
       {
-        'name': 'meta.preprocessor.c.haskell'
+        'name': 'meta.preprocessor.c.frege'
         'begin': '^(?=#)'
         'end': '(?<!\\\\)(?=\\n)'
         'patterns': [
@@ -718,15 +743,15 @@
   'string':
     'patterns': [
       {
-        'name': 'string.quoted.double.haskell'
+        'name': 'string.quoted.double.frege'
         'begin': '"'
         'end': '"'
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.string.begin.haskell'
+            'name': 'punctuation.definition.string.begin.frege'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.string.end.haskell'
+            'name': 'punctuation.definition.string.end.frege'
         'patterns': [
           {
             'include': '#characters'
@@ -736,10 +761,10 @@
             'end': '\\\\'
             'beginCaptures':
               '0':
-                'name': 'markup.other.escape.newline.begin.haskell'
+                'name': 'markup.other.escape.newline.begin.frege'
             'endCaptures':
               '0':
-                'name': 'markup.other.escape.newline.end.haskell'
+                'name': 'markup.other.escape.newline.end.frege'
             'patterns': [
               {
                 'include': '#invalid'
@@ -752,18 +777,18 @@
   'newline_escape':
     'patterns': [
       {
-        'name': 'markup.other.escape.newline.haskell'
+        'name': 'markup.other.escape.newline.frege'
         'match': '\\\\$'
       }
     ]
   'quoted_character':
     'patterns': [
       {
-        'name': 'string.quoted.single.haskell'
+        'name': 'string.quoted.single.frege'
         'match': '(\')((?:[\\ -\\[\\]-~]|\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])|(?:\\\\o[0-7]+)|(?:\\\\x[0-9A-Fa-f]+)|(?:\\\\\\^[A-Z@\\[\\]\\\\^_])|(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))(\')'
         'captures':
           '1':
-            'name': 'punctuation.definition.string.begin.haskell'
+            'name': 'punctuation.definition.string.begin.frege'
           '2':
             'patterns': [
               {
@@ -771,7 +796,7 @@
               }
             ]
           '3':
-            'name': 'punctuation.definition.string.end.haskell'
+            'name': 'punctuation.definition.string.end.frege'
       }
     ]
   'scoped_type':
@@ -782,7 +807,7 @@
           '1':
             'patterns': [
               {
-                'include': '#haskell_expr'
+                'include': '#frege_expr'
               }
             ]
       }
@@ -790,9 +815,9 @@
         'match': '((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))(.*?)(?=(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))|$)'
         'captures':
           '1':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.frege'
           '2':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.frege'
             'patterns': [
               {
                 'include': '#type_signature'
@@ -812,9 +837,9 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.frege'
           '4':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.frege'
             'patterns': [
               {
                 'include': '#type_signature'
@@ -834,33 +859,33 @@
   'comma':
     'patterns': [
       {
-        'name': 'punctuation.separator.comma.haskell'
+        'name': 'punctuation.separator.comma.frege'
         'match': ','
       }
     ]
   'lit_num':
     'patterns': [
       {
-        'name': 'constant.numeric.hexadecimal.haskell'
+        'name': 'constant.numeric.hexadecimal.frege'
         'match': '0[xX][0-9a-fA-F]+'
       }
       {
-        'name': 'constant.numeric.octal.haskell'
+        'name': 'constant.numeric.octal.frege'
         'match': '0[oO][0-7]+'
       }
       {
-        'name': 'constant.numeric.float.haskell'
+        'name': 'constant.numeric.float.frege'
         'match': '[0-9]+(\\.[0-9]+[eE][+-]?|\\.|[eE][+-]?)[0-9]+'
       }
       {
-        'name': 'constant.numeric.decimal.haskell'
+        'name': 'constant.numeric.decimal.frege'
         'match': '[0-9]+'
       }
     ]
   'operator':
     'patterns': [
       {
-        'name': 'keyword.operator.haskell'
+        'name': 'keyword.operator.frege'
         'match': '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+'
       }
     ]
@@ -868,7 +893,7 @@
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'identifier.haskell'
+        'name': 'identifier.frege'
         'captures':
           '0':
             'patterns': [
@@ -876,7 +901,7 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'support.function.prelude.$1.haskell'
+                'name': 'support.function.prelude.$1.frege'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(abs|acos|acosh|all|and|any|appendFile|asTypeOf|asin|asinh|atan|atan2|atanh|break|ceiling|compare|concat|concatMap|const|cos|cosh|curry|cycle|decodeFloat|div|divMod|drop|dropWhile|either|elem|encodeFloat|enumFrom|enumFromThen|enumFromThenTo|enumFromTo|error|even|exp|exponent|fail|filter|flip|floatDigits|floatRadix|floatRange|floor|fmap|foldMap|foldl|foldl1|foldr|foldr1|fromEnum|fromInteger|fromIntegral|fromRational|fst|gcd|getChar|getContents|getLine|head|id|init|interact|ioError|isDenormalized|isIEEE|isInfinite|isNaN|isNegativeZero|iterate|last|lcm|length|lex|lines|log|logBase|lookup|map|mapM|mapM_|mappend|max|maxBound|maximum|maybe|mconcat|mempty|min|minBound|minimum|mod|negate|not|notElem|null|odd|or|otherwise|pi|pred|print|product|properFraction|pure|putChar|putStr|putStrLn|quot|quotRem|read|readFile|readIO|readList|readLn|readParen|reads|readsPrec|realToFrac|recip|rem|repeat|replicate|return|reverse|round|scaleFloat|scanl|scanl1|scanr|scanr1|seq|sequence|sequenceA|sequence_|show|showChar|showList|showParen|showString|shows|showsPrec|significand|signum|sin|sinh|snd|span|splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum|toInteger|toRational|traverse|truncate|uncurry|undefined|unlines|until|unwords|unzip|unzip3|userError|words|writeFile|zip|zip3|zipWith|zipWith3)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -885,7 +910,7 @@
   'type_name':
     'patterns': [
       {
-        'name': 'entity.name.type.haskell'
+        'name': 'entity.name.type.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '0':
@@ -894,11 +919,11 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'entity.other.inherited-class.prelude.$1.haskell'
+                'name': 'entity.other.inherited-class.prelude.$1.frege'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(Applicative|Bounded|Enum|Eq|Floating|Foldable|Fractional|Functor|Integral|Monad|Monoid|Num|Ord|Read|Real|RealFloat|RealFrac|Show|Traversable)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
               {
-                'name': 'support.class.prelude.$1.haskell'
+                'name': 'support.class.prelude.$1.frege'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(Either|FilePath|IO|IOError|Integer|Maybe|Ordering|Rational|ReadS|ShowS|String|Bool|Char|Double|Float|Int|Word)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -907,7 +932,7 @@
   'type_ctor':
     'patterns': [
       {
-        'name': 'entity.name.tag.haskell'
+        'name': 'entity.name.tag.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '0':
@@ -916,7 +941,7 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'support.tag.prelude.$1.haskell'
+                'name': 'support.tag.prelude.$1.frege'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(EQ|GT|Just|LT|Left|Nothing|Right|True|False)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -926,27 +951,27 @@
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.frege'
       }
     ]
   'family_and_instance':
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(family|instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.frege'
       }
     ]
   'invalid':
     'patterns': [
       {
         'match': '\\S+'
-        'name': 'invalid.illegal.character-not-allowed-here.haskell'
+        'name': 'invalid.illegal.character-not-allowed-here.frege'
       }
     ]
   'function_name':
     'patterns': [
       {
-        'name': 'entity.name.function.haskell'
+        'name': 'entity.name.function.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
@@ -956,26 +981,26 @@
         'match': '='
         'captures':
           '0':
-            'name': 'keyword.operator.assignment.haskell'
+            'name': 'keyword.operator.assignment.frege'
       }
     ]
   'attribute_name':
     'patterns': [
       {
-        'name': 'entity.other.attribute-name.haskell'
+        'name': 'entity.other.attribute-name.frege'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
-  'liquidhaskell_annotation':
+  'liquidfrege_annotation':
     'patterns': [
       {
-        'name': 'block.liquidhaskell.haskell'
-        'contentName': 'block.liquidhaskell.annotation.haskell'
+        'name': 'block.liquidfrege.frege'
+        'contentName': 'block.liquidfrege.annotation.frege'
         'begin': '\\{-@(?!#)'
         'end': '@-\\}'
         'patterns': [
           {
-            'include': '#haskell_expr'
+            'include': '#frege_expr'
           }
         ]
       }
@@ -983,11 +1008,11 @@
   'shebang':
     'patterns': [
       {
-        'name': 'comment.line.shebang.haskell'
-        'match': '^\\#\\!.*\\brunhaskell\\b.*$'
+        'name': 'comment.line.shebang.frege'
+        'match': '^\\#\\!.*\\brunfrege\\b.*$'
       }
     ]
-  'haskell_expr':
+  'frege_expr':
     'patterns': [
       {
         'include': '#infix_function'
@@ -1041,10 +1066,10 @@
         'include': '#type_ctor'
       }
     ]
-  'haskell_toplevel':
+  'frege_toplevel':
     'patterns': [
       {
-        'include': '#liquidhaskell_annotation'
+        'include': '#liquidfrege_annotation'
       }
       {
         'include': '#class_decl'
@@ -1077,10 +1102,10 @@
         'include': '#function_type_declaration'
       }
       {
-        'include': '#haskell_expr'
+        'include': '#frege_expr'
       }
     ]
-  'haskell_source':
+  'frege_source':
     'patterns': [
       {
         'include': '#shebang'
@@ -1089,11 +1114,6 @@
         'include': '#module_decl'
       }
       {
-        'include': '#haskell_toplevel'
+        'include': '#frege_toplevel'
       }
     ]
-'patterns': [
-  {
-    'include': '#haskell_source'
-  }
-]

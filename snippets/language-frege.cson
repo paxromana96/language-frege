@@ -1,4 +1,4 @@
-'.source .haskell':
+'.source .frege':
   'Pragma':
     'prefix': '{-#'
     'body': '{-# $1 #-'
@@ -21,7 +21,7 @@
       '''
   '#!/usr/bin/env…':
     'prefix': '#!'
-    'body': '#!/usr/bin/env ${1:runhaskell}'
+    'body': '#!/usr/bin/env ${1:runfrege}'
   'Lambda Expression':
     'prefix': '\\'
     'body': "\\\\${1:pattern} -> ${0:expression}"
@@ -151,64 +151,22 @@
   'Black star':
     'prefix': '*'
     'body': '★' #0x2605
-'.source .haskell:not(.comment)':
+'.source .frege:not(.comment)':
   'Guard':
     'prefix': '|'
     'body': '| ${1:predicate} = ${0:definition}'
-'.source .haskell.comment':
+'.source .frege.comment':
   'Haddock Postfix':
     'prefix': '|'
     'body': '| ${0:documentation}'
   'Haddock Prefix':
     'prefix': '^'
     'body': '^ ${0:documentation}'
-'.source .haskell.constant.language.empty-list':
+'.source .frege.constant.language.empty-list':
   'List Comprehension':
     'prefix': '['
     'body': '[ ${1:expression} | ${2:${3:name} <- ${4:expression}}$0'
-'.source .haskell.meta.type':
+'.source .frege.meta.type':
   'deriving …':
     'prefix': 'der'
     'body': 'deriving (${0:Class})'
-'.source.cabal':
-  'executable':
-    'prefix': 'exe'
-    'body': '''
-      executable ${1:exename}
-        hs-source-dirs:      ${2:app}
-        main-is:             ${3:Main.hs}
-        ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
-        build-depends:       base
-                           , ${4:libname}
-        default-language:    Haskell2010
-       '''
-  'library':
-    'prefix': 'lib'
-    'body': '''
-      library
-        hs-source-dirs:      ${1:src}
-        exposed-modules:     ${2:Lib}
-        other-modules:       ${3:Module}
-        build-depends:       base >= 4 && < 5
-        ghc-options:         -Wall
-        default-language:    Haskell2010
-      '''
-  'repository':
-    'prefix': 'repo'
-    'body': '''
-      source-repository head
-        type:     git
-        location: https://github.com/${1:githubuser}/${2:project}
-      '''
-  'test':
-    'prefix': 'test'
-    'body': '''
-      test-suite ${1:test-name}
-        type:                exitcode-stdio-1.0
-        hs-source-dirs:      ${2:test}
-        main-is:             ${3:Spec.hs}
-        build-depends:       base
-                           , ${4:libname}
-        ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
-        default-language:    Haskell2010
-      '''

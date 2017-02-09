@@ -1,3 +1,8 @@
+## 2.0.0
+* Adapted Haskell (.hs) grammar to Frege (.fr) via simple text replacement
+* Removed .lhs and .cabal
+* Removed c2hs and hsc2hs
+
 ## 1.12.1
 * Fix comments in imports (now before ())
 
@@ -128,14 +133,14 @@ and in many cases didn't work very well.
 * Better highlighting for type families
 * GADTs unified with `data` definitons
 * Simplified many regexes to avoid unexpected backtracking-related hangs
-* Most haskell grammar patterns moved to repository
+* Most frege grammar patterns moved to repository
 * Fix GADT ctor scope to `tag`
 * Grammar files are distributed instead of being generated now
 * Remove hack used for grammar hooks
 
 ## 1.7.17
 * Prelude typeclasses
-* Merge branch 'master' of github.com:atom-haskell/language-haskell
+* Merge branch 'master' of github.com:atom-frege/language-frege
 * Grab prelude definitions from Prelude
 
 ## 1.7.16
@@ -161,7 +166,7 @@ and in many cases didn't work very well.
 * Updated contributors
 
 ## 1.7.10
-* added liquidhaskell comment block (PR #69 by @ranjitjhala)
+* added liquidfrege comment block (PR #69 by @ranjitjhala)
 
 ## 1.7.9
 * Add 'type instance' keyword
@@ -182,7 +187,7 @@ and in many cases didn't work very well.
 
 ## 1.7.4
 * More accurate inline type signature match
-* Add meta.type-signature.haskell to in-line sigs
+* Add meta.type-signature.frege to in-line sigs
 
 ## 1.7.3
 * Fix message highlighting
@@ -197,10 +202,10 @@ and in many cases didn't work very well.
 * In-line type signatures
 
 ## 1.7.0
-* Haskell message hint grammar
+* Frege message hint grammar
 
 ## 1.6.0
-* Haskell Type Hint grammar
+* Frege Type Hint grammar
 
 ## 1.5.2
 * Don't confuse timecop
@@ -209,7 +214,7 @@ and in many cases didn't work very well.
 * Support multiline module export ctors (#60)
 
 ## 1.5.0
-* Haskell Autocompletion Hint grammar
+* Frege Autocompletion Hint grammar
 
 ## 1.4.12
 * Fix #58 (escaped quotes in multiline strings)
@@ -248,7 +253,7 @@ and in many cases didn't work very well.
 * Pipe escapes for LHS (#45)
 
 ## 1.4.0
-* Match scripts with `runhaskell` shebang as Haskell files
+* Match scripts with `runfrege` shebang as Frege files
 * Add highlighting rule for shebang
 
 ## 1.3.1
@@ -309,7 +314,7 @@ and in many cases didn't work very well.
 ## 1.1.0
 
 ## 1.0.2
-* Merge pull request #31 from atom-haskell/master
+* Merge pull request #31 from atom-frege/master
 * Remove deriving from type alias
 * Simplify and data/newtype/record syntax
 * Extend ctor args, empty line doesn't count as ind. block end
@@ -319,14 +324,14 @@ and in many cases didn't work very well.
 * Allow qualified fn and cn
 * Fix ident block end regex
 * Fix bugs with type_signature looping
-* Fix meta.declaration.type.data.record.haskell gobble
+* Fix meta.declaration.type.data.record.frege gobble
 * Snippets updates and fixes
 * deriving fix, some semantics for type/newtype/data
 * type/newtype/data declarations
 * More semantic naming
 * Record field declaration syntax
-* Haskell grammar fixes and cleanup
-* Added snippets from ide-haskell
+* Frege grammar fixes and cleanup
+* Added snippets from ide-frege
 * Added UnicodeSyntax snippets
 * Snippets cleanup
 * Atom API 1.0 deprecation fixes
@@ -360,4 +365,4 @@ and in many cases didn't work very well.
 
 ## 0.1.0
 * update README.md with useful info (Jared Roesch)
-* Initial commit converted from https://github.com/textmate/haskell.tmbundle (Jared Roesch)
+* Initial commit converted from https://github.com/textmate/frege.tmbundle (Jared Roesch)

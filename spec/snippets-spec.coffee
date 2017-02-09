@@ -1,6 +1,6 @@
 CSON = require 'season'
 
-defs = CSON.readFileSync("#{__dirname}/../snippets/language-haskell.cson")
+defs = CSON.readFileSync("#{__dirname}/../snippets/language-frege.cson")
 
 describe "Snippets", ->
   [editorElement, editor, Snippets] = []
@@ -25,28 +25,28 @@ describe "Snippets", ->
 
   universalTests = ->
     it 'triggers snippets', ->
-      expect((for name, {prefix, body} of defs['.source .haskell']
+      expect((for name, {prefix, body} of defs['.source .frege']
         editor.setText("")
         editor.insertText(prefix)
         simulateTabKeyEvent()
         expect(editor.getText().trim()).toBe sanitize(body).trim()
       ).length).toBeGreaterThan 0
     it 'triggers non-comment snippets', ->
-      expect((for name, {prefix, body} of defs['.source .haskell:not(.comment)']
+      expect((for name, {prefix, body} of defs['.source .frege:not(.comment)']
         editor.setText("")
         editor.insertText(prefix)
         simulateTabKeyEvent()
         expect(editor.getText().trim()).toBe sanitize(body).trim()
       ).length).toBeGreaterThan 0
     it 'triggers comment snippets', ->
-      expect((for name, {prefix, body} of defs['.source .haskell.comment']
+      expect((for name, {prefix, body} of defs['.source .frege.comment']
         editor.setText("")
         editor.insertText("-- #{prefix}")
         simulateTabKeyEvent()
         expect(editor.getText().trim()).toBe "-- #{sanitize(body).trim()}"
       ).length).toBeGreaterThan 0
     it 'triggers empty-list snippets', ->
-      expect((for name, {prefix, body} of defs['.source .haskell.constant.language.empty-list']
+      expect((for name, {prefix, body} of defs['.source .frege.constant.language.empty-list']
         editor.setText("")
         editor.insertText("#{prefix}]")
         editor.getLastCursor().moveLeft()
@@ -54,7 +54,7 @@ describe "Snippets", ->
         expect(editor.getText().trim()).toBe "#{sanitize(body).trim()}]"
       ).length).toBeGreaterThan 0
     it 'triggers type snippets', ->
-      expect((for name, {prefix, body} of defs['.source .haskell.meta.type']
+      expect((for name, {prefix, body} of defs['.source .frege.meta.type']
         editor.setText("")
         editor.insertText("data Data = Constr #{prefix}")
         simulateTabKeyEvent()
@@ -63,7 +63,7 @@ describe "Snippets", ->
 
   beforeEach ->
     waitsForPromise ->
-      atom.packages.activatePackage("language-haskell")
+      atom.packages.activatePackage("language-frege")
     waitsForPromise ->
       snippets = atom.packages.getLoadedPackage('snippets') ? \
         atom.packages.loadPackage("#{process.env.HOME}/.atom/packages/snippets")
@@ -73,42 +73,11 @@ describe "Snippets", ->
         new Promise (resolve) ->
           Snippets.onDidLoadSnippets -> resolve()
 
-  describe 'haskell', ->
+  describe 'frege', ->
     beforeEach ->
       waitsForPromise ->
-        atom.workspace.open('sample.hs')
+        atom.workspace.open('sample.fr')
       runs ->
         editor = atom.workspace.getActiveTextEditor()
         editorElement = atom.views.getView(editor)
     universalTests()
-  describe 'c2hs', ->
-    beforeEach ->
-      waitsForPromise ->
-        atom.workspace.open('sample.chs')
-      runs ->
-        editor = atom.workspace.getActiveTextEditor()
-        editorElement = atom.views.getView(editor)
-    universalTests()
-  describe 'hsc2hs', ->
-    beforeEach ->
-      waitsForPromise ->
-        atom.workspace.open('sample.hsc')
-      runs ->
-        editor = atom.workspace.getActiveTextEditor()
-        editorElement = atom.views.getView(editor)
-    universalTests()
-
-  describe 'cabal', ->
-    beforeEach ->
-      waitsForPromise ->
-        atom.workspace.open('sample.cabal')
-      runs ->
-        editor = atom.workspace.getActiveTextEditor()
-        editorElement = atom.views.getView(editor)
-    it 'triggers snippets', ->
-      expect((for name, {prefix, body} of defs['.source.cabal']
-        editor.setText("")
-        editor.insertText(prefix)
-        simulateTabKeyEvent()
-        expect(editor.getText().trim()).toBe sanitize(body).trim()
-      ).length).toBeGreaterThan 0

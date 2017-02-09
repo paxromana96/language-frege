@@ -10,7 +10,7 @@ module.exports=
   className: /{classNameOne}(?:\.{classNameOne})*/
   operatorChar: '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))'
   ###
-  In case this regex seems overly general, note that Haskell
+  In case this regex seems overly general, note that Frege
   permits the definition of new operators which can be nearly any string
   of punctuation characters, such as $%^&*.
   ###
