@@ -1,7 +1,7 @@
-## 2.0.0
+## 0.1.0
 * Adapted Haskell (.hs) grammar to Frege (.fr) via simple text replacement
-* Removed .lhs and .cabal
-* Removed c2hs and hsc2hs
+* Removed support for .lhs and .cabal
+* Removed references to c2hs and hsc2hs
 
 ## 1.12.1
 * Fix comments in imports (now before ())
