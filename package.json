@@ -1,6 +1,6 @@
 {
   "name": "language-frege",
-  "version": "1.12.1",
+  "version": "2.0.0",
   "description": "Frege language support in Atom",
   "repository": "https://github.com/paxromana96/language-frege",
   "license": "MIT",
