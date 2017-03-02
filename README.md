@@ -2,7 +2,7 @@
 
 Adds syntax highlighting and snippets to Frege files in Atom.
 
-Forked from the package [language-haskell](https://github.com/atom-haskell/language-haskell).
+Forked from the package [language-haskell](https://github.com/atom-haskell/language-haskell), since Frege is a Haskell for the JVM.
 
 Grammars:
 
@@ -182,6 +182,7 @@ Contributors (by number of commits):
 * mdgriffith
 * Jesse Cooke
 * Ian D. Bollinger
+* JJ Brown
 
 See the [LICENSE.md][LICENSE] for details.
 
