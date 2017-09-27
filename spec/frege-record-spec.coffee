@@ -555,17 +555,6 @@ describe 'Record', ->
                   "meta.type-signature.frege",
                   "comment.line.double-dash.frege"
                 ]
-              },
-              {
-                "value": "",
-                "scopes": [
-                  "source.frege",
-                  "meta.declaration.type.data.frege",
-                  "meta.declaration.type.data.record.block.frege",
-                  "meta.record-field.type-declaration.frege",
-                  "meta.type-signature.frege",
-                  "comment.line.double-dash.frege"
-                ]
               }
             ],
             [
@@ -593,17 +582,6 @@ describe 'Record', ->
               },
               {
                 "value": " model :: String, -- commented field",
-                "scopes": [
-                  "source.frege",
-                  "meta.declaration.type.data.frege",
-                  "meta.declaration.type.data.record.block.frege",
-                  "meta.record-field.type-declaration.frege",
-                  "meta.type-signature.frege",
-                  "comment.line.double-dash.frege"
-                ]
-              },
-              {
-                "value": "",
                 "scopes": [
                   "source.frege",
                   "meta.declaration.type.data.frege",
@@ -700,17 +678,6 @@ describe 'Record', ->
               },
               {
                 "value": " another comment",
-                "scopes": [
-                  "source.frege",
-                  "meta.declaration.type.data.frege",
-                  "meta.declaration.type.data.record.block.frege",
-                  "meta.record-field.type-declaration.frege",
-                  "meta.type-signature.frege",
-                  "comment.line.double-dash.frege"
-                ]
-              },
-              {
-                "value": "",
                 "scopes": [
                   "source.frege",
                   "meta.declaration.type.data.frege",
@@ -847,15 +814,6 @@ describe 'Record', ->
           },
           {
             "value": " company :: String",
-            "scopes": [
-              "source.frege",
-              "meta.declaration.type.data.frege",
-              "meta.declaration.type.data.record.block.frege",
-              "comment.line.double-dash.frege"
-            ]
-          },
-          {
-            "value": "",
             "scopes": [
               "source.frege",
               "meta.declaration.type.data.frege",

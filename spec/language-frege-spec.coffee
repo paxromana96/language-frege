@@ -479,10 +479,9 @@ describe "Language-Frege", ->
   describe "regression test for comments after module name in imports", ->
     it "parses comments after module names", ->
       g = grammarExpect grammar, 'import Module -- comment'
-      g.toHaveTokens [['import', ' ', 'Module', ' ', '--', ' comment', '']]
+      g.toHaveTokens [['import', ' ', 'Module', ' ', '--', ' comment']]
       g.toHaveScopes [['source.frege', 'meta.import.frege']]
       g.tokenToHaveScopes [[[2, ['support.other.module.frege']]
                             [4, ['comment.line.double-dash.frege', 'punctuation.definition.comment.frege']]
                             [5, ['comment.line.double-dash.frege']]
-                            [6, ['comment.line.double-dash.frege']]
                             ]]

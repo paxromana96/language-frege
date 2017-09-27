@@ -36,7 +36,7 @@ module.exports=
         patterns: [
             name: 'comment.line.double-dash.haddock.frege'
             begin: /(--+)\s+([|^])/
-            end: /\n/
+            end: /$/
             beginCaptures:
               1: name: 'punctuation.definition.comment.frege'
               2: name: 'punctuation.definition.comment.haddock.frege'
@@ -52,7 +52,7 @@ module.exports=
         patterns: [
             name: 'comment.line.double-dash.frege'
             begin: /--/
-            end: /\n/
+            end: /$/
             beginCaptures:
               0: name: 'punctuation.definition.comment.frege'
         ]
@@ -398,7 +398,7 @@ module.exports=
   c_preprocessor:
     name: 'meta.preprocessor.c'
     begin: /{maybeBirdTrack}(?=#)/
-    end: '(?<!\\\\)(?=\\n)'
+    end: '(?<!\\\\)(?=$)'
     patterns: [
       include: 'source.c'
     ]
